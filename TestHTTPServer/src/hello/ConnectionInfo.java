@@ -4,6 +4,7 @@ import io.netty.channel.Channel;
 
 import java.util.Date;
 
+//класс для хранения информации о соединении 
 public class ConnectionInfo {
 		private Channel channel;
 		private String src_ip, URI;

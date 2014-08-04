@@ -18,13 +18,9 @@ import static io.netty.handler.codec.http.HttpHeaders.*;
 import static io.netty.handler.codec.http.HttpResponseStatus.*;
 import static io.netty.handler.codec.http.HttpVersion.*;
   
+//обработчик запросов(формирование ответа на запросы)
   public class RequestsHandler extends SimpleChannelInboundHandler<HttpRequest> {
-      @Override
-      public void channelReadComplete(ChannelHandlerContext ctx) {
-          //ctx.flush();
-   
-    	  //ctx.close();
-      }
+
   
       @Override
       public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
@@ -40,10 +36,7 @@ import static io.netty.handler.codec.http.HttpVersion.*;
    		  ServerInfo.addRequest(address.substring(1,address.lastIndexOf(":")), new Date());
    		  ServerInfo.setURLToChannel(ctx.channel(), request.getUri());    
           QueryStringDecoder queryStringDecoder = new QueryStringDecoder(request.getUri());
-             
-          
-	      
-	      
+
 	      switch (queryStringDecoder.path()) {
 	      
 	      case "/hello":
@@ -71,7 +64,7 @@ import static io.netty.handler.codec.http.HttpVersion.*;
 	      }
 		}
 	      
-
+	//ответ при вызове http://localhost:8080/hello
 	private void sendHelloResponse(final ChannelHandlerContext ctx){
 		ctx.executor().schedule(new Runnable() {
             public void run() {
@@ -84,6 +77,7 @@ import static io.netty.handler.codec.http.HttpVersion.*;
 
 	}
 	
+	//ответ при вызове http://localhost:8080/status
 	private  void sendStatusResponse(ChannelHandlerContext ctx){
 	  	StringBuilder responseContent = new StringBuilder();
 	  	 responseContent.append("<html>")
@@ -159,6 +153,8 @@ import static io.netty.handler.codec.http.HttpVersion.*;
             ctx.writeAndFlush(response).addListener(ChannelFutureListener.CLOSE);
        }
 	
+	
+	//ответ, при вызове http://localhost:8080/redirect?url=<url>
     private static void sendRedirectResponse(ChannelHandlerContext ctx, String newUri) {
         FullHttpResponse response = new DefaultFullHttpResponse(HTTP_1_1, FOUND);
         response.headers().set(LOCATION, newUri);

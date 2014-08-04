@@ -7,6 +7,8 @@ import io.netty.channel.ChannelPromise;
 import io.netty.handler.traffic.ChannelTrafficShapingHandler;
 import io.netty.handler.traffic.TrafficCounter;
 
+
+//обработчик трафика(получение статистики соединения)
 public class TraficHandler extends ChannelTrafficShapingHandler {
 	 private ConnectionInfo connectionInfo; 
 	 private long speed;
@@ -23,7 +25,7 @@ public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
 	super.channelReadComplete(ctx);
 }
 	
-	
+	//получение информации о соединении перед его закрытием 
 	@Override
 	public void close(ChannelHandlerContext ctx, ChannelPromise future)	throws Exception {
 		connectionInfo = new ConnectionInfo(ctx.channel());
@@ -41,6 +43,7 @@ public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
 		super.close(ctx, future);
 	}
 	
+	//получение скорости входящих данных
 	private long getReadSpeed(){
 		TrafficCounter trafficCounter =  this.trafficCounter();
 	    long time = System.currentTimeMillis() - trafficCounter.lastTime();
