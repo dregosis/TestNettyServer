@@ -1,6 +1,6 @@
 TestNettyServer
 ===============
-Приложение собрано и экспортировано в runnable jar файл посредством 
+Приложение(http-сервер на фреймворке netty) собрано и экспортировано в runnable jar файл посредством Eclipse.
 
 1. По запросу на "http://localhost:8080/hello" отдает «Hello World» через 10 секунд;
 2. По запросу на "http://localhost:8080/redirect?url=<url>" происходит переадресация на указанный url;
