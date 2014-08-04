@@ -30,3 +30,5 @@ TestNettyServer
 Добавить библиотеку : (ПКМ на проект)Properties ->java build path -> add jas-> добавить netty-all-4.0.21.Final
 Настроить Run configurations:  Run -> Run configurations -> Project: TestHTTPServer   Main class: hello.HttpServer -> Apply -> Run  
 Export: (ПКМ на проект)Export -> Runnuble jar file -> Launch configuration: run configurations, который мы создали   extract...-галочка
+
+Для запуска сервера нужно запустить главный класс HttpServer(в Eclipse) или запустить jar-файл.
