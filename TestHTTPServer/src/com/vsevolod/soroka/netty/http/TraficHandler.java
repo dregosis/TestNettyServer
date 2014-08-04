@@ -1,4 +1,4 @@
-package hello;
+package com.vsevolod.soroka.netty.http;
 
 import java.util.Date;
 

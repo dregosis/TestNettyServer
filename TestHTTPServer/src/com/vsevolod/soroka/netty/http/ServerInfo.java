@@ -1,8 +1,7 @@
-package hello;
+package com.vsevolod.soroka.netty.http;
 
 import io.netty.channel.Channel;
 import io.netty.channel.group.DefaultChannelGroup;
-import io.netty.handler.codec.http.HttpContentEncoder.Result;
 
 import java.util.Date;
 import java.util.Enumeration;
@@ -34,18 +33,22 @@ public class ServerInfo {
     } 
     
     public static ConnectionInfo findConnectionInfoByChannel(Channel channel){
+    	synchronized (connectionsInfo) {
     	for (ConnectionInfo element : connectionsInfo) {
 			if(element.isThisChannel(channel))
 				return element;
 		}
     	return null;
+    	}
     } 
     
     public static void addNewConnectionInfo(ConnectionInfo connectionInfo) {
+    	synchronized (connectionsInfo) {
 		connectionsInfo.add(connectionInfo);
 		while(connectionsInfo.size()>16){
 			connectionsInfo.remove(0);
 		}
+    	}
 	}
     
 	public static synchronized void addConnection(Channel channel ){
@@ -59,18 +62,22 @@ public class ServerInfo {
 	
 	
 	public static void addURLRequest(String url){
+		synchronized (urlRequests) {
 		if(urlRequests.containsKey(url))
 			urlRequests.replace(url, urlRequests.get(url)+1);
 		else
 			urlRequests.put(url, 1);
+		}
 	}
 	
-	public static void addRequest(String IP, Date date){
+	public static  void addRequest(String IP, Date date){
+		synchronized(requestsCount){
 		if(requestsDate.containsKey(IP))
 			requestsCount.replace(IP, requestsCount.get(IP)+1);
 		else
 			requestsCount.put(IP, 1);
 		requestsDate.put(IP, date);
+		}
 	}
 	
 	public static int getRequestsCountWithUniqueIP(){

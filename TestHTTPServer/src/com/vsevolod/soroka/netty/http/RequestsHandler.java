@@ -1,4 +1,4 @@
-package hello;
+package com.vsevolod.soroka.netty.http;
 
 import java.util.Date;
 import java.util.Vector;
@@ -19,12 +19,6 @@ import static io.netty.handler.codec.http.HttpResponseStatus.*;
 import static io.netty.handler.codec.http.HttpVersion.*;
   
   public class RequestsHandler extends SimpleChannelInboundHandler<HttpRequest> {
-      @Override
-      public void channelReadComplete(ChannelHandlerContext ctx) {
-          //ctx.flush();
-   
-    	  //ctx.close();
-      }
   
       @Override
       public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {

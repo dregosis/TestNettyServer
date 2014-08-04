@@ -1,4 +1,4 @@
-package hello;
+package com.vsevolod.soroka.netty.http;
 
 import io.netty.channel.Channel;
 
