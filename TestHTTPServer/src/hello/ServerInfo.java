@@ -2,13 +2,14 @@ package hello;
 
 import io.netty.channel.Channel;
 import io.netty.channel.group.DefaultChannelGroup;
+import io.netty.handler.codec.http.HttpContentEncoder.Result;
 
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Vector;
 
-//класс для хранении статистики сервера  
+
 public class ServerInfo {
 	private static Hashtable<String, Date> requestsDate = new Hashtable<String, Date>();
 	private static Hashtable<String, Integer> requestsCount = new Hashtable<String, Integer>();
